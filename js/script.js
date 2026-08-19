@@ -735,9 +735,14 @@ window.RESOURCES_GENERAL = [
 
   // ---------- init ----------
   (async function init() {
-    await loadState();
-    renderAll();
-    document.getElementById("loading").classList.add("hidden");
-    document.getElementById("app").classList.add("ready");
+    try {
+      await loadState();
+      renderAll();
+    } catch (e) {
+      console.error("Init failed:", e);
+    } finally {
+      document.getElementById("loading").classList.add("hidden");
+      document.getElementById("app").classList.add("ready");
+    }
   })();
 })();
